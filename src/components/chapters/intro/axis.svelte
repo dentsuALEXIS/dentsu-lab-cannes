@@ -1,6 +1,8 @@
 <script>
+	import { activeChapter } from '$lib/store'
 	import { gsap } from 'gsap'
 	import { onMount } from 'svelte'
+
 	import Logo from './logo.svelte'
 
 	let x = null
@@ -16,7 +18,12 @@
 	let timeline = null
 
 	onMount(() => {
-		timeline = gsap.timeline({ paused: true })
+		timeline = gsap.timeline({
+			paused: true,
+			onComplete: () => {
+				activeChapter.set(1)
+			}
+		})
 
 		timeline.add(
 			gsap.to(x, {
