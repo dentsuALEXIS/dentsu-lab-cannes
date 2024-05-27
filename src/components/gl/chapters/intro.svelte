@@ -39,6 +39,8 @@
 
 		group.position.z = -10
 
+		group.scale.setScalar(0.5)
+
 		createMesh()
 
 		scene.add(group)

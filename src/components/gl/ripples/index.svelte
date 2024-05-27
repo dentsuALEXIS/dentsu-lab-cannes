@@ -12,6 +12,10 @@
 	let ready = false
 	let mesh = null
 
+	export function getTexture() {
+		return mesh.material.uniforms.uTexture.value
+	}
+
 	function onResize() {
 		if (mesh) {
 			mesh.scale.set($windowSize.w, $windowSize.h, 1)
@@ -37,6 +41,8 @@
 		mesh = new Mesh(geometry, material)
 
 		mesh.position.z = -10
+
+		mesh.layers.set(1)
 
 		scene.add(mesh)
 

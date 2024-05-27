@@ -12,7 +12,7 @@
 		radius: SIZE,
 		width: SIZE,
 		height: SIZE,
-		maxAge: SIZE * 6
+		maxAge: SIZE * 8
 	}
 
 	export let mesh

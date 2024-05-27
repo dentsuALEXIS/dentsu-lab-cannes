@@ -30,7 +30,7 @@
 
 	function onTick() {
 		if (ready && visible) {
-			console.log('tick intro')
+			console.log('tick clients')
 		}
 	}
 
@@ -38,6 +38,8 @@
 		group = new Group()
 
 		group.position.z = -10
+
+		group.scale.setScalar(0.5)
 
 		createMesh()
 

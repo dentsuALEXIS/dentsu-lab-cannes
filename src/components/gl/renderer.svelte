@@ -10,7 +10,7 @@
 	async function onInit() {
 		renderer = new WebGLRenderer({
 			alpha: false,
-			antialias: true,
+			antialias: false,
 			canvas
 		})
 
