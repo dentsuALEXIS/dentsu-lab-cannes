@@ -1,0 +1,43 @@
+@use 'sass:math';
+
+@mixin hover() {
+	@media (hover: hover) {
+		&:hover {
+			@content;
+		}
+	}
+}
+
+@mixin responsive($class) {
+	@if $class == xs {
+		@media (min-width: $xs) {
+			@content;
+		}
+	} @else if $class == sm {
+		@media (min-width: $sm) {
+			@content;
+		}
+	} @else if $class == md {
+		@media (min-width: $md) {
+			@content;
+		}
+	} @else if $class == lg {
+		@media (min-width: $lg) {
+			@content;
+		}
+	} @else if $class == xl {
+		@media (min-width: $xl) {
+			@content;
+		}
+	} @else if $class == xxl {
+		@media (min-width: $xxl) {
+			@content;
+		}
+	} @else {
+		@warn "responsive mixin supports: xs, sm, md, lg";
+	}
+}
+
+@function px($size) {
+	@return math.div($size, 16) * 1rem;
+}
