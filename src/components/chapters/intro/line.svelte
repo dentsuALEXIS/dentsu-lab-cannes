@@ -24,6 +24,8 @@
 		timeline.progress(0)
 
 		timeline.play()
+
+		return () => {}
 	})
 </script>
 

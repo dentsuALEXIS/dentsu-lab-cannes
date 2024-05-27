@@ -75,7 +75,7 @@ const fragmentShaderComposition = `
 
     vec4 worldColor = fxaa(uTexture, fragCoord, uResolution, v_rgbNW, v_rgbNE, v_rgbSW, v_rgbSE, v_rgbM);
 
-    worldColor.rgb -= displacement.rgb / 5.0;
+    worldColor.rgb += displacement.rgb / 5.0;
 
     gl_FragColor = worldColor;
   }

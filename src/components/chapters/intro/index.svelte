@@ -3,11 +3,13 @@
 	import { onMount } from 'svelte'
 
 	import Kinetic from './kinetic.svelte'
+	import Axis from './axis.svelte'
+	import Logo from './logo.svelte'
 
 	const length = 6 * 6
 	const blocks = new Array(length).fill('placeholder')
 
-	let currentStep = 1
+	let currentStep = 0
 
 	let element = null
 	let timeline = null
@@ -27,9 +29,11 @@
 
 		timeline.add(() => {
 			currentStep = 1
-		}, 0.75)
+		}, 0.7)
 
 		timeline.play()
+
+		return () => {}
 	})
 </script>
 
@@ -45,7 +49,7 @@
 	{/if}
 
 	{#if currentStep === 1}
-		Step 1
+		<Axis />
 	{/if}
 </section>
 
