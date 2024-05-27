@@ -69,14 +69,13 @@ const fragmentShaderComposition = `
     float theta = displacement.r * 2.0 * PI;
 
     vec2 direction = vec2(sin(theta), cos(theta));
-    vec2 uv = vUv + direction * displacement.r * 0.1;
+    vec2 uv = vUv + direction * displacement.r * 0.05;
 
     vec2 fragCoord = uv * uResolution;   
 
     vec4 worldColor = fxaa(uTexture, fragCoord, uResolution, v_rgbNW, v_rgbNE, v_rgbSW, v_rgbSE, v_rgbM);
 
-    worldColor.rgb += displacement.rgb / 2.0;
-    // worldColor.rgb = levels(uRipples.rgb, uLevels.x, uLevels.y, uLevels.z);
+    worldColor.rgb += displacement.rgb / 5.0;
 
     gl_FragColor = worldColor;
   }
