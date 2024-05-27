@@ -34,15 +34,15 @@
 
 	function onResize() {
 		if (compositionTarget) {
-			compositionTarget.setSize($windowSize.w * 2, $windowSize.h * 2)
+			compositionTarget.setSize($windowSize.w * 1.5, $windowSize.h * 1.5)
 		}
 
 		if (compositionQuad) {
 			compositionQuad.scale.set($windowSize.w, $windowSize.h)
 
 			compositionQuad.material.uniforms.uResolution.value = new Vector2(
-				$windowSize.w * 2,
-				$windowSize.h * 2
+				$windowSize.w * 1.5,
+				$windowSize.h * 1.5
 			)
 		}
 	}
@@ -126,7 +126,7 @@
 
 {#if ready}
 	<Raycaster {scene} />
-	<Intro {scene} visible={$activeChapter === 0} />
+	<!-- <Intro {scene} visible={$activeChapter === 0} />å -->
 	<Statement {scene} visible={$activeChapter === 1} />
 	<Reel {scene} visible={$activeChapter === 2} />
 	<Cases {scene} visible={$activeChapter === 3} />

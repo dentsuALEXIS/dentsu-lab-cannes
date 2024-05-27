@@ -14,8 +14,8 @@
 			canvas
 		})
 
-		renderer.setClearColor('#000000')
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+		renderer.setClearColor('#ffffff')
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
 
 		if (gl) {
 			gl.update((store) => {

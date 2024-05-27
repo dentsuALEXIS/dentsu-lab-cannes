@@ -30,6 +30,7 @@
 	"type": "module",
 	"dependencies": {
 		"autoprefixer": "^10.4.19",
+		"gsap": "^3.12.5",
 		"hls.js": "^1.5.8",
 		"nanoid": "^5.0.7",
 		"postcss": "^8.4.38",
