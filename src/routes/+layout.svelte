@@ -4,7 +4,10 @@
 	import { canHover, webpSupported } from '$lib/store'
 
 	import Device from 'svelte-device-info'
+
 	import GL from '$components/gl/index.svelte'
+	import Chapters from '$components/chapters/index.svelte'
+	import Navigation from '$components/navigation.svelte'
 
 	import { onMount } from 'svelte'
 
@@ -35,8 +38,8 @@
 
 {#await promise then}
 	<GL />
+	<Chapters />
+	<Navigation />
 {/await}
 
-<div class="fixed inset-0 flex h-full w-full items-center justify-center text-white">
-	<span>Dentsu Lab - Cannes</span>
-</div>
+<slot />

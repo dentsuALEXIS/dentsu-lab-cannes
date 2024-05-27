@@ -1,6 +1,6 @@
 import { browser } from '$app/environment'
-import { get, writable } from 'svelte/store'
 import { clickStamp, windowSize } from './store'
+import { get, writable } from 'svelte/store'
 
 import Device from 'svelte-device-info'
 

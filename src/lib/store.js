@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store'
 
+const activeChapter = writable(0)
+
 const canHover = writable(false)
 
 const clickStamp = writable(undefined)
@@ -17,4 +19,4 @@ const windowSize = writable({
 	h: 0
 })
 
-export { canHover, clickStamp, gl, webpSupported, windowSize }
+export { activeChapter, canHover, clickStamp, gl, webpSupported, windowSize }

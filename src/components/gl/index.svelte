@@ -43,7 +43,7 @@
 
 <Camera />
 
-{#if $gl.renderer && $gl.orthographicCamera && $gl.perspectiveCamera}
+{#if $gl.renderer && $gl.orthographicCamera}
 	<World />
 {/if}
 
