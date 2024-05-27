@@ -7,14 +7,29 @@
 	const length = 6 * 6
 	const blocks = new Array(length).fill('placeholder')
 
-	let currentStep = 0
+	let currentStep = 1
+
 	let element = null
+	let timeline = null
 
 	onMount(() => {
-		gsap.set(element, {
-			scale: 0.875,
-			delay: 1 / 3
-		})
+		timeline = gsap.timeline({ paused: true })
+
+		if (element) {
+			timeline.add(
+				gsap.set(element, {
+					scale: 0.875,
+					delay: 0.35
+				}),
+				0
+			)
+		}
+
+		timeline.add(() => {
+			currentStep = 1
+		}, 0.75)
+
+		timeline.play()
 	})
 </script>
 
@@ -27,6 +42,10 @@
 				{/key}
 			{/each}
 		</div>
+	{/if}
+
+	{#if currentStep === 1}
+		Step 1
 	{/if}
 </section>
 

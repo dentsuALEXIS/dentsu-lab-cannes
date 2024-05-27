@@ -7,14 +7,14 @@
 	let letters = []
 
 	onMount(() => {
-		const timeline = new gsap.timeline({ paused: true })
+		const timeline = gsap.timeline({ paused: true })
 
 		letters.forEach((letter, index) => {
 			timeline.add(
 				gsap.to(letter, {
-					marginLeft: `1vw`,
-					duration: 0.2,
-					delay: index * 0.075,
+					marginLeft: `0.75vw`,
+					duration: 0.15,
+					delay: index * 0.0875,
 					ease: 'expo.inOut'
 				}),
 				0

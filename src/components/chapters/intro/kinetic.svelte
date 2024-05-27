@@ -1,8 +1,7 @@
 <script>
-	import { gsap } from 'gsap'
-	import { onMount } from 'svelte'
-	import { windowSize } from '$lib/store'
 	import Line from './line.svelte'
+
+	import { windowSize } from '$lib/store'
 
 	const locations = ['London', 'Amsterdam', 'Milan', 'Paris', 'Warsaw', 'Madrid', 'Hamburg']
 
