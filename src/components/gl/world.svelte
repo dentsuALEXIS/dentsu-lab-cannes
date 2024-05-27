@@ -11,6 +11,8 @@
 	import Reel from './chapters/reel.svelte'
 	import Statement from './chapters/statement.svelte'
 
+	import Ripples from './ripples/index.svelte'
+
 	let scene = undefined
 	let tick = undefined
 	let ready = false
@@ -49,10 +51,11 @@
 </script>
 
 {#if ready}
-	<Raycaster {scene} />
+	<!-- <Raycaster {scene} />
 	<Intro {scene} visible={$activeChapter === 0} />
 	<Statement {scene} visible={$activeChapter === 1} />
 	<Reel {scene} visible={$activeChapter === 2} />
 	<Cases {scene} visible={$activeChapter === 3} />
-	<Clients {scene} visible={$activeChapter === 4} />
+	<Clients {scene} visible={$activeChapter === 4} /> -->
+	<Ripples {scene} />
 {/if}
