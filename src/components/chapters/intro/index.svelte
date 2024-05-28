@@ -4,18 +4,15 @@
 
 	import Kinetic from './kinetic.svelte'
 	import Axis from './axis.svelte'
-	import Logo from './logo.svelte'
 
 	const length = 6 * 6
 	const blocks = new Array(length).fill('placeholder')
 
 	let currentStep = 0
-
 	let element = null
-	let timeline = null
 
 	onMount(() => {
-		timeline = gsap.timeline({ paused: true })
+		const timeline = gsap.timeline({ paused: true })
 
 		if (element) {
 			timeline.add(
@@ -33,7 +30,12 @@
 
 		timeline.play()
 
-		return () => {}
+		return () => {
+			if (timeline) {
+				timeline.kill()
+				timeline.clear()
+			}
+		}
 	})
 </script>
 

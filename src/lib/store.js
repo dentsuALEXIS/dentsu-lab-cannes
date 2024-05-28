@@ -2,6 +2,8 @@ import { writable } from 'svelte/store'
 
 const activeChapter = writable(0)
 
+const timelines = writable(new Array(4).fill(null))
+
 const canHover = writable(false)
 
 const clickStamp = writable(undefined)

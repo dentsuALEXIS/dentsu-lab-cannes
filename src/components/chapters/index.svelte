@@ -1,5 +1,6 @@
 <script>
 	import { activeChapter } from '$lib/store'
+
 	import Cases from './cases.svelte'
 	import Clients from './clients.svelte'
 	import Intro from './intro/index.svelte'
