@@ -25,7 +25,12 @@
 
 		timeline.play()
 
-		return () => {}
+		return () => {
+			if (timeline) {
+				timeline.kill()
+				timeline.clear()
+			}
+		}
 	})
 </script>
 

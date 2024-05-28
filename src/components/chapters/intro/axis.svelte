@@ -15,10 +15,8 @@
 	let zLine = null
 	let logo = null
 
-	let timeline = null
-
 	onMount(() => {
-		timeline = gsap.timeline({
+		const timeline = gsap.timeline({
 			paused: true,
 			onComplete: () => {
 				activeChapter.set(1)
@@ -119,7 +117,12 @@
 
 		timeline.play()
 
-		return () => {}
+		return () => {
+			if (timeline) {
+				timeline.kill()
+				timeline.clear()
+			}
+		}
 	})
 </script>
 
