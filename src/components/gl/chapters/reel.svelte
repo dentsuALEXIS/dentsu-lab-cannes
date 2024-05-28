@@ -56,7 +56,7 @@
 	function onVisibleCheck() {
 		if (video) {
 			if (visible) {
-				// video.play()
+				video.play()
 			} else {
 				video.currentTime = 0
 				video.pause()

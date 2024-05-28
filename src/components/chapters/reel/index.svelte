@@ -29,6 +29,7 @@
 	let currentTime = 0
 
 	let tick = undefined
+	let timeline = undefined
 
 	let list = []
 	let reversedList = []
@@ -95,26 +96,52 @@
 			})
 		})
 
-		// timeline.add(
-		// 	() => {
-		// 		activeChapter.set(3)
-		// 	},
-		// 	projects[projects.length - 1].sum
-		// )
+		timeline.add(
+			() => {
+				activeChapter.set(3)
+			},
+			projects[projects.length - 1].sum
+		)
+	}
+
+	async function animateOut() {
+		timeline.pause()
+
+		const firstRow = [...transformElements].slice(0, 8)
+		const lastRow = [...transformElements].slice(8, 16)
+
+		const rows = [firstRow, lastRow]
+
+		let tween
+
+		rows.forEach((row) => {
+			row.forEach((element, index) => {
+				gsap.killTweensOf(element)
+
+				tween = gsap.to(element, {
+					y: '100%',
+					ease: 'expo.out',
+					duration: 0.65,
+					delay: index * 0.05
+				})
+			})
+		})
+
+		return tween
 	}
 
 	function onTick() {
-		currentTime = $reelElement?.currentTime || 0
+		if (!activeControls) {
+			currentTime = $reelElement?.currentTime || 0
 
-		const activeProject = [...projects].filter((project) => project.sum >= currentTime)[0]
+			const activeProject = [...projects].filter((project) => project.sum >= currentTime)[0]
 
-		activeIndex = projects.indexOf(activeProject)
-
-		console.log(activeIndex)
+			activeIndex = projects.indexOf(activeProject)
+		}
 	}
 
 	onMount(() => {
-		const timeline = gsap.timeline({ paused: true })
+		timeline = gsap.timeline({ paused: true })
 
 		tick = ticker.add(onTick)
 
@@ -162,7 +189,7 @@
 
 			<div class="overflow-y-clip leading-[0.9]">
 				<ul
-					class="relative flex translate-y-[100%] flex-col items-end"
+					class="relative flex translate-y-[100%] flex-col items-end overflow-y-clip"
 					bind:this={transformElements[3]}
 				>
 					{#each projects as project, i}
@@ -184,7 +211,10 @@
 			</div>
 
 			<div class="overflow-y-clip leading-[0.9]">
-				<ul class="relative flex flex-col items-start" bind:this={transformElements[5]}>
+				<ul
+					class="relative flex flex-col items-start overflow-y-clip"
+					bind:this={transformElements[5]}
+				>
 					{#each projects as project, i}
 						<li
 							bind:this={list[i]}
@@ -257,7 +287,9 @@
 		class="absolute inset-0 h-full w-full"
 		type="button"
 		aria-label="Open fullscreen showreel"
-		on:click={() => {
+		on:click={async () => {
+			await animateOut()
+
 			activeControls = true
 		}}
 	>
