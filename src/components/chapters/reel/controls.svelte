@@ -4,6 +4,8 @@
 	import { onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
 
+	export let setActiveHover
+
 	let element = null
 	let input = null
 	let scale = null
@@ -74,6 +76,12 @@
 	<button
 		class="absolute right-[5rem] top-[3.875rem] text-[1.125rem] font-bold"
 		type="button"
+		on:mousemove={() => {
+			setActiveHover(true)
+		}}
+		on:mouseleave={() => {
+			setActiveHover(false)
+		}}
 		on:click={async () => {
 			// await animateOut()
 
@@ -83,7 +91,15 @@
 		Close
 	</button>
 
-	<div class="absolute bottom-0 left-0 right-0 px-[12.5rem] py-[3.75rem] pl-[10rem]">
+	<div
+		class="absolute bottom-0 left-0 right-0 px-[12.5rem] py-[3.75rem] pl-[10rem]"
+		on:mousemove={() => {
+			setActiveHover(true)
+		}}
+		on:mouseleave={() => {
+			setActiveHover(false)
+		}}
+	>
 		<div class="relative mx-1 flex h-[1px] w-full bg-white bg-opacity-[35%]">
 			<div
 				bind:this={scale}
@@ -109,8 +125,6 @@
 
 					if ($reelElement) {
 						$reelElement.currentTime = progress * $reelElement.duration
-
-						console.log(progress * $reelElement.duration)
 					}
 				}}
 			/>

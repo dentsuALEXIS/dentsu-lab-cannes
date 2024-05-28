@@ -17,6 +17,7 @@ const fragmentShader = `
   uniform vec2 uImageSize;
 
   uniform sampler2D uTexture;
+  uniform float uOpacity;
 
   varying vec2 vUv;
 
@@ -42,9 +43,16 @@ const fragmentShader = `
     vec2 texCenter = vec2(0.5);
     vec2 texScale = (uvScale - texCenter) * 1.0 + texCenter;
     
-    vec4 color = texture2D(uTexture, texScale);
+    vec3 color = texture2D(uTexture, texScale).rgb;
 
-    gl_FragColor = color;
+    float averageColor = (color.r + color.g + color.b) / 3.0;
+
+    if (averageColor < 0.5) {
+      color.rgb *= uOpacity;
+    }
+    
+    
+    gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + vec4(color, 1.0);
   }
 `
 

@@ -26,6 +26,7 @@
 	]
 
 	let activeControls = false
+	let activeHover = false
 	let activeIndex = 0
 	let currentTime = 0
 
@@ -35,6 +36,10 @@
 	let list = []
 	let reversedList = []
 	let transformElements = []
+
+	function setActiveHover(mode) {
+		activeHover = mode
+	}
 
 	function onActiveProjectChange(activeIndex) {
 		gsap.killTweensOf(list)
@@ -298,7 +303,7 @@
 </section>
 
 {#if activeControls && $reelElement}
-	<Controls />
+	<Controls {setActiveHover} />
 {/if}
 
-<Cursor {activeControls} />
+<Cursor {activeControls} {activeHover} />

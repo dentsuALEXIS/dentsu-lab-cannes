@@ -6,6 +6,7 @@
 	import { ticker } from '$lib/ticker'
 
 	export let activeControls
+	export let activeHover
 
 	let active = false
 	let element = null
@@ -66,9 +67,23 @@
 	}
 
 	onMount(() => {
+		function onMouseMove() {
+			clearTimeout(timeout)
+
+			moving = true
+
+			timeout = setTimeout(() => {
+				moving = false
+			}, 1000)
+		}
+
+		window.addEventListener('mousemove', onMouseMove)
+
 		tick = ticker.add(onTick)
 
 		return () => {
+			window.removeEventListener('mousemove', onMouseMove)
+
 			if (tick) {
 				ticker.remove(tick)
 			}
@@ -80,19 +95,7 @@
 	}
 
 	$: {
-		if ($mouse.pointer) {
-			clearTimeout(timeout)
-
-			moving = true
-
-			timeout = setTimeout(() => {
-				moving = false
-			}, 1000)
-		}
-	}
-
-	$: {
-		onMovingChange(moving)
+		onMovingChange(moving && !activeHover)
 	}
 </script>
 
