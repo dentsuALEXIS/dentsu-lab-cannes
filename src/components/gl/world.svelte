@@ -2,7 +2,6 @@
 	import { activeChapter, gl, windowSize } from '$lib/store'
 	import { fragmentShaderComposition, vertexShaderComposition } from './glsl/composition'
 	import {
-		Group,
 		Mesh,
 		PlaneGeometry,
 		Scene,
@@ -16,7 +15,6 @@
 	import Raycaster from './raycaster.svelte'
 	import Cases from './chapters/cases.svelte'
 	import Clients from './chapters/clients.svelte'
-	import Intro from './chapters/intro.svelte'
 	import Reel from './chapters/reel.svelte'
 	import Statement from './chapters/statement.svelte'
 
@@ -122,13 +120,15 @@
 			onResize()
 		}
 	}
+
+	export let showreelUrl;
 </script>
 
 {#if ready}
 	<Raycaster {scene} />
 	<!-- <Intro {scene} visible={$activeChapter === 0} />å -->
 	<Statement {scene} visible={$activeChapter === 1} />
-	<Reel {scene} visible={$activeChapter === 2} />
+	<Reel {scene} {showreelUrl} visible={$activeChapter === 2} />
 	<Cases {scene} visible={$activeChapter === 3} />
 	<Clients {scene} visible={$activeChapter === 4} />
 	<Ripples bind:this={ripples} {scene} />

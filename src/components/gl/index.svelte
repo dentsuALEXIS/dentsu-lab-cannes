@@ -35,6 +35,8 @@
 	onMount(async () => {
 		bindObserver()
 	})
+
+	export let showreelUrl;
 </script>
 
 <div bind:this={element}>
@@ -44,7 +46,7 @@
 <Camera />
 
 {#if $gl.renderer && $gl.orthographicCamera}
-	<World />
+	<World {showreelUrl} />
 {/if}
 
 <style lang="scss">
