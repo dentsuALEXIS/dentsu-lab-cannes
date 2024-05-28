@@ -3,11 +3,12 @@ import { defineConfig } from 'vitest/config'
 import mkcert from 'vite-plugin-mkcert'
 
 export default defineConfig({
-	plugins: [sveltekit(), mkcert()],
+	// plugins: [sveltekit(), mkcert()],
+	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	},
-	server: {
-		https: true
 	}
+	// server: {
+	// 	https: true
+	// }
 })

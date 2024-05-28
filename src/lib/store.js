@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-const activeChapter = writable(2)
+const activeChapter = writable(0)
 
 const timelines = writable(new Array(4).fill(null))
 
@@ -14,6 +14,8 @@ const gl = writable({
 	renderer: null
 })
 
+const reelElement = writable(undefined)
+
 const webpSupported = writable(false)
 
 const windowSize = writable({
@@ -21,4 +23,4 @@ const windowSize = writable({
 	h: 0
 })
 
-export { activeChapter, canHover, clickStamp, gl, webpSupported, windowSize }
+export { activeChapter, canHover, clickStamp, gl, reelElement, webpSupported, windowSize }

@@ -1,12 +1,13 @@
 <script>
 	import Hls from 'hls.js'
 
+	import { gsap } from 'gsap'
 	import { disposeObject } from '$lib/dispose'
 	import { fragmentShader, vertexShader } from './glsl/reel'
 	import { Group, Mesh, PlaneGeometry, ShaderMaterial, VideoTexture, Vector2 } from 'three'
 	import { onDestroy, onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
-	import { windowSize } from '$lib/store'
+	import { reelElement, windowSize } from '$lib/store'
 
 	export let scene
 	export let visible
@@ -66,8 +67,14 @@
 	function onVisibleCheck() {
 		if (video) {
 			if (visible) {
+				animateIn()
+
 				video.play()
 			} else {
+				if (mesh) {
+					mesh.material.uniforms.uOpacity.value = 0
+				}
+
 				video.currentTime = 0
 				video.pause()
 			}
@@ -89,6 +96,9 @@
 				uMeshSize: {
 					value: new Vector2($windowSize.w, $windowSize.h)
 				},
+				uOpacity: {
+					value: 0
+				},
 				transparent: true
 			}
 		})
@@ -96,6 +106,22 @@
 		mesh = new Mesh(geometry, material)
 
 		group.add(mesh)
+	}
+
+	function animateIn() {
+		gsap.killTweensOf(mesh.material.uniforms.uOpacity)
+
+		gsap.fromTo(
+			mesh.material.uniforms.uOpacity,
+			{
+				value: 0
+			},
+			{
+				value: 1,
+				ease: 'power2.out',
+				duration: 1
+			}
+		)
 	}
 
 	function onResize() {
@@ -150,10 +176,18 @@
 		if (tick) {
 			ticker.remove(tick)
 		}
+
+		if (video) {
+			video.remove()
+
+			reelElement.set(undefined)
+		}
 	})
 
 	$: {
 		if (group && loaded) {
+			reelElement.set(video)
+
 			group.visible = visible
 
 			onVisibleCheck()
