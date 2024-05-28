@@ -6,6 +6,8 @@
 	import Intro from './intro/index.svelte'
 	import Reel from './reel/index.svelte'
 	import Statement from './statement.svelte'
+
+	export let image
 </script>
 
 {#if $activeChapter === 0}
@@ -13,7 +15,7 @@
 {/if}
 
 {#if $activeChapter === 1}
-	<Statement />
+	<Statement {image} />
 {/if}
 
 {#if $activeChapter === 2}

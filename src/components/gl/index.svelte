@@ -36,7 +36,7 @@
 		bindObserver()
 	})
 
-	export let showreelUrl;
+	export let showreelUrl
 </script>
 
 <div bind:this={element}>

@@ -18,6 +18,7 @@ export async function load() {
 	})
 
 	const showreel = data.story.content.body.find((blok) => blok.component === 'showreel')
+	const image = data.story.content.image.filename
 
 	let url = ''
 	if (showreel) {
@@ -27,6 +28,7 @@ export async function load() {
 	}
 
 	return {
-		showreelUrl: url
+		showreelUrl: url,
+		image: image
 	}
 }

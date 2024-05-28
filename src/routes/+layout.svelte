@@ -11,7 +11,7 @@
 
 	import { onMount } from 'svelte'
 
-	export let data;
+	export let data
 
 	const promise = onInitCheck()
 
@@ -38,7 +38,7 @@
 
 {#await promise then}
 	<GL showreelUrl={data.showreelUrl} />
-	<Chapters />
+	<Chapters image={data.image} />
 	<Navigation />
 {/await}
 

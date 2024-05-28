@@ -12,9 +12,10 @@
 	export let scene
 	export let visible
 
-	export let showreelUrl;
+	export let showreelUrl
 
-	let url = showreelUrl ||
+	let url =
+		showreelUrl ||
 		'https://player.vimeo.com/external/913085807.m3u8?s=dd78225e2fb87ffc8c9bdf148a1fc86df73c5993&logging=false'
 
 	let group = null
