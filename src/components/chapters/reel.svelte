@@ -87,12 +87,12 @@
 			)
 		})
 
-		timeline.add(
-			() => {
-				activeChapter.set(3)
-			},
-			projects[projects.length - 1].sum
-		)
+		// timeline.add(
+		// 	() => {
+		// 		activeChapter.set(3)
+		// 	},
+		// 	projects[projects.length - 1].sum
+		// )
 	}
 
 	function onTick() {
