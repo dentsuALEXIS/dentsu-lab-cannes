@@ -6,7 +6,7 @@
 	import { Group, Mesh, PlaneGeometry, ShaderMaterial, VideoTexture, Vector2 } from 'three'
 	import { onDestroy, onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
-	import { windowSize } from '$lib/store'
+	import { reelElement, windowSize } from '$lib/store'
 
 	export let scene
 	export let visible
@@ -140,10 +140,18 @@
 		if (tick) {
 			ticker.remove(tick)
 		}
+
+		if (video) {
+			video.remove()
+
+			reelElement.set(undefined)
+		}
 	})
 
 	$: {
 		if (group && loaded) {
+			reelElement.set(video)
+
 			group.visible = visible
 
 			onVisibleCheck()

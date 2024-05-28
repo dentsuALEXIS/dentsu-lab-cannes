@@ -14,6 +14,8 @@ const gl = writable({
 	renderer: null
 })
 
+const reelElement = writable(undefined)
+
 const webpSupported = writable(false)
 
 const windowSize = writable({
@@ -21,4 +23,4 @@ const windowSize = writable({
 	h: 0
 })
 
-export { activeChapter, canHover, clickStamp, gl, webpSupported, windowSize }
+export { activeChapter, canHover, clickStamp, gl, reelElement, webpSupported, windowSize }

@@ -1,12 +1,29 @@
 <script>
-	import { activeChapter } from '$lib/store'
+	import { activeChapter, reelElement } from '$lib/store'
 	import { gsap } from 'gsap'
 	import { onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
 	import { Clock } from 'three'
 
+	let projects = [
+		{
+			label: 'Unlabeled',
+			duration: 2,
+			sum: 2
+		},
+		{
+			label: 'All Players Welcome',
+			duration: 4,
+			sum: 4
+		},
+		{
+			label: 'Wind Of Change',
+			duration: 6,
+			sum: 6
+		}
+	]
+
 	let activeIndex = 0
-	let projects = ['Unlabeled', 'All Players Welcome', 'Wind Of Change']
 	let currentTime = 0
 
 	let clock = null
@@ -17,6 +34,9 @@
 	let transformElements = []
 
 	function onActiveProjectChange(activeIndex) {
+		gsap.killTweensOf(list)
+		gsap.killTweensOf(reversedList)
+
 		list.forEach((element, index) => {
 			const realIndex = index - activeIndex
 
@@ -67,15 +87,22 @@
 			)
 		})
 
-		timeline.add(() => {
-			// activeChapter.set(3)
-		}, 4)
+		timeline.add(
+			() => {
+				activeChapter.set(3)
+			},
+			projects[projects.length - 1].sum
+		)
 	}
 
 	function onTick() {
-		currentTime = clock.getElapsedTime()
+		currentTime = $reelElement?.currentTime || 0
 
-		activeIndex = Math.floor(currentTime)
+		const activeProject = [...projects].filter((project) => project.sum >= currentTime)[0]
+
+		activeIndex = projects.indexOf(activeProject)
+
+		console.log(activeIndex)
 	}
 
 	onMount(() => {
@@ -138,7 +165,7 @@
 							class={`right-0 top-0 flex ${i === 0 ? '' : 'absolute'}`}
 							style={`transform: translate(0%, ${i * 100}%)`}
 						>
-							<span>{project}</span>
+							<span>{project.label}</span>
 						</li>
 					{/each}
 				</ul>
@@ -158,7 +185,7 @@
 							class={`left-0 top-0 flex ${i === 0 ? '' : 'absolute'}`}
 							style={`transform: translate(0%, ${i * 100}%)`}
 						>
-							<span>{project}</span>
+							<span>{project.label}</span>
 						</li>
 					{/each}
 				</ul>
@@ -181,25 +208,15 @@
 	<div class="relative flex w-full justify-around">
 		<div class="flex flex-col items-end whitespace-nowrap">
 			<div class="flex overflow-y-clip leading-[0.9]">
-				<span class="translate-y-[100%]" bind:this={transformElements[8]}>Dentsu Lab</span>
+				<span class="translate-y-[100%]" bind:this={transformElements[14]}>Dentsu Lab</span>
 			</div>
 
 			<div class="flex overflow-y-clip leading-[0.9]">
-				<span class="translate-y-[100%]" bind:this={transformElements[9]}>Tokyo 2024</span>
+				<span class="translate-y-[100%]" bind:this={transformElements[15]}>Tokyo 2024</span>
 			</div>
 		</div>
 
 		<div class="flex flex-col items-end whitespace-nowrap">
-			<div class="flex overflow-y-clip leading-[0.9]">
-				<span class="translate-y-[100%]" bind:this={transformElements[10]}>Play</span>
-			</div>
-
-			<div class="flex overflow-y-clip leading-[0.9]">
-				<span class="translate-y-[100%]" bind:this={transformElements[11]}>Showreel</span>
-			</div>
-		</div>
-
-		<div class="flex flex-col whitespace-nowrap">
 			<div class="flex overflow-y-clip leading-[0.9]">
 				<span class="translate-y-[100%]" bind:this={transformElements[12]}>Play</span>
 			</div>
@@ -211,11 +228,21 @@
 
 		<div class="flex flex-col whitespace-nowrap">
 			<div class="flex overflow-y-clip leading-[0.9]">
-				<span class="translate-y-[100%]" bind:this={transformElements[14]}>Dentsu Lab</span>
+				<span class="translate-y-[100%]" bind:this={transformElements[10]}>Play</span>
 			</div>
 
 			<div class="flex overflow-y-clip leading-[0.9]">
-				<span class="translate-y-[100%]" bind:this={transformElements[15]}>Tokyo 2024</span>
+				<span class="translate-y-[100%]" bind:this={transformElements[11]}>Showreel</span>
+			</div>
+		</div>
+
+		<div class="flex flex-col whitespace-nowrap">
+			<div class="flex overflow-y-clip leading-[0.9]">
+				<span class="translate-y-[100%]" bind:this={transformElements[8]}>Dentsu Lab</span>
+			</div>
+
+			<div class="flex overflow-y-clip leading-[0.9]">
+				<span class="translate-y-[100%]" bind:this={transformElements[9]}>Tokyo 2024</span>
 			</div>
 		</div>
 	</div>
