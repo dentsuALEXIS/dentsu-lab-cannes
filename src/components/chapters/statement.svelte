@@ -74,12 +74,14 @@
 			{ yPercent: Math.random() * 20 - 10 },
 			'<'
 		)
-	}
 
-	// fixme
-	// timeline.add(() => {
-	// 	activeChapter.set(2)
-	// }, 2)
+		setTimeout(() => {
+			activeChapter.set(2)
+		}, 3000)
+
+		// timeline.add(() => {
+		// }, 4)
+	}
 
 	onMount(() => {
 		createTimeline()
