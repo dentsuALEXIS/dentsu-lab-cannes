@@ -58,6 +58,7 @@
 			if (visible) {
 				video.play()
 			} else {
+				video.currentTime = 0
 				video.pause()
 			}
 		}
