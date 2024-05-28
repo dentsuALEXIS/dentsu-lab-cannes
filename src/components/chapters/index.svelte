@@ -4,7 +4,7 @@
 	import Cases from './cases.svelte'
 	import Clients from './clients.svelte'
 	import Intro from './intro/index.svelte'
-	import Reel from './reel.svelte'
+	import Reel from './reel/index.svelte'
 	import Statement from './statement.svelte'
 </script>
 

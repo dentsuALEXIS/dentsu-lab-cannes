@@ -1,9 +1,10 @@
 <script>
+	import Controls from './controls.svelte'
+
 	import { activeChapter, reelElement } from '$lib/store'
 	import { gsap } from 'gsap'
 	import { onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
-	import { Clock } from 'three'
 
 	let projects = [
 		{
@@ -23,10 +24,10 @@
 		}
 	]
 
+	let activeControls = false
 	let activeIndex = 0
 	let currentTime = 0
 
-	let clock = null
 	let tick = undefined
 
 	let list = []
@@ -67,24 +68,31 @@
 	}
 
 	function createTimeline(timeline) {
-		transformElements.forEach((element, index) => {
-			const delay = index % 2 === 0 ? 0 : 0.075
+		const firstRow = [...transformElements].slice(0, 8)
+		const lastRow = [...transformElements].slice(8, 16)
 
-			timeline.add(
-				gsap.fromTo(
-					element,
-					{
-						y: '100%'
-					},
-					{
-						y: '0%',
-						ease: 'expo.out',
-						duration: 0.5,
-						delay
-					}
-				),
-				index * 0.025
-			)
+		const rows = [firstRow, lastRow]
+
+		rows.forEach((row) => {
+			row.forEach((element, index) => {
+				const delay = index % 2 === 0 ? 0 : 0.075
+
+				timeline.add(
+					gsap.fromTo(
+						element,
+						{
+							y: '100%'
+						},
+						{
+							y: '0%',
+							ease: 'expo.out',
+							duration: 0.75,
+							delay
+						}
+					),
+					index * 0.05
+				)
+			})
 		})
 
 		// timeline.add(
@@ -107,8 +115,6 @@
 
 	onMount(() => {
 		const timeline = gsap.timeline({ paused: true })
-
-		clock = new Clock()
 
 		tick = ticker.add(onTick)
 
@@ -251,6 +257,13 @@
 		class="absolute inset-0 h-full w-full"
 		type="button"
 		aria-label="Open fullscreen showreel"
+		on:click={() => {
+			activeControls = true
+		}}
 	>
 	</button>
 </section>
+
+{#if activeControls && $reelElement}
+	<Controls video={$reelElement} />
+{/if}

@@ -75,18 +75,17 @@ const fragmentShaderComposition = `
     vec2 uv = vUv + direction * displacementTexture.r * 0.025;
     // vec2 fragCoord = uv * uResolution;   
 
-
+    vec2 displacementUv = uv;
     // rgb shift world
-    vec4 displacementWorld = texture2D(uTexture, uv);
+    vec4 displacementWorld = texture2D(uTexture, displacementUv);
 
-    uv.x += 0.0035;
-    uv.y += 0.0035;
-    displacementWorld.g = texture2D(uTexture, uv).g;
+    displacementUv.x += 0.0035;
+    displacementUv.y += 0.0035;
+    displacementWorld.g = texture2D(uTexture, displacementUv).g;
 
-    uv.x -= 0.007;
-    uv.y -= 0.007;
-    displacementWorld.b = texture2D(uTexture, uv).b;
-
+    displacementUv.x -= 0.007;
+    displacementUv.y -= 0.007;
+    displacementWorld.b = texture2D(uTexture, displacementUv).b;
     
     // basic render texture 
     vec4 basicWorld = texture2D(uTexture, uv);
@@ -101,7 +100,10 @@ const fragmentShaderComposition = `
     // add mouse following air to texture
     finalColor.rgb += displacementTexture.rgb / 7.5;
 
+    // float f = noise(fract(uv) * 10.0);  
+
     gl_FragColor = finalColor;
+    // gl_FragColor = vec4(vec3(step), 1.0);
   }
 `
 

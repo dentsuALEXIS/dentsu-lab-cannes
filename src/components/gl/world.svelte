@@ -12,6 +12,7 @@
 	} from 'three'
 	import { onDestroy, onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
+	import { disposeObject } from '$lib/dispose'
 
 	import Raycaster from './raycaster.svelte'
 	import Cases from './chapters/cases.svelte'

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import { activeChapter } from '$lib/store'
 
 	function seekNext(mode = 'forward') {
@@ -38,4 +38,4 @@
 	on:click={() => {
 		seekNext()
 	}}
-></button>
+></button> -->
