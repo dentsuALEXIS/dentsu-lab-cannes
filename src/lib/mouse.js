@@ -141,8 +141,8 @@ const mouse = writable(
 
 			update((store) => {
 				if (store) {
-					store.mouse.x = 1000
-					store.mouse.y = -1000
+					// store.mouse.x = 1000
+					// store.mouse.y = -1000
 					store.drag.active = false
 
 					isDragging = false

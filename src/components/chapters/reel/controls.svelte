@@ -4,8 +4,6 @@
 	import { onMount } from 'svelte'
 	import { ticker } from '$lib/ticker'
 
-	export let video
-
 	let element = null
 	let input = null
 	let scale = null
@@ -122,10 +120,10 @@
 			class="absolute right-[5rem] top-1/2 -translate-y-1/2 text-[1.125rem] font-bold"
 			type="button"
 			on:click={() => {
-				video.muted = !video.muted
+				$reelElement.muted = !$reelElement.muted
 			}}
 		>
-			{video.muted ? 'Unmute' : 'Mute'}
+			{$reelElement.muted ? 'Unmute' : 'Mute'}
 		</button>
 	</div>
 

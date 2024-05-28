@@ -1,5 +1,6 @@
 <script>
 	import Controls from './controls.svelte'
+	import Cursor from './cursor.svelte'
 
 	import { activeChapter, reelElement } from '$lib/store'
 	import { gsap } from 'gsap'
@@ -96,12 +97,12 @@
 			})
 		})
 
-		timeline.add(
-			() => {
-				activeChapter.set(3)
-			},
-			projects[projects.length - 1].sum
-		)
+		// timeline.add(
+		// 	() => {
+		// 		activeChapter.set(3)
+		// 	},
+		// 	projects[projects.length - 1].sum
+		// )
 	}
 
 	async function animateOut() {
@@ -297,5 +298,7 @@
 </section>
 
 {#if activeControls && $reelElement}
-	<Controls video={$reelElement} />
+	<Controls />
 {/if}
+
+<Cursor {activeControls} />

@@ -15,7 +15,7 @@
 		})
 
 		renderer.setClearColor('#ffffff')
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 		if (gl) {
 			gl.update((store) => {
