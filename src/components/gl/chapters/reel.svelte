@@ -11,7 +11,9 @@
 	export let scene
 	export let visible
 
-	const url =
+	export let showreelUrl;
+
+	let url = showreelUrl ||
 		'https://player.vimeo.com/external/913085807.m3u8?s=dd78225e2fb87ffc8c9bdf148a1fc86df73c5993&logging=false'
 
 	let group = null
@@ -41,6 +43,14 @@
 
 			hls.on(Hls.Events.MANIFEST_LOADED, () => {
 				loaded = true
+			})
+
+			hls.on(Hls.Events.ERROR, () => {
+				video.src = url
+
+				video.addEventListener('loadedmetadata', () => {
+					loaded = true
+				})
 			})
 		} else if (video.canPlayType('application/vnd.apple.mpegurl')) {
 			video.src = url
